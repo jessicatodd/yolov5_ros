@@ -192,7 +192,7 @@ class Yolov5Detector:
 
 if __name__ == "__main__":
 
-    check_requirements(exclude=("tensorboard", "thop"))
+    check_requirements(exclude=("tensorboard", "thop", "opencv-python"))
     
     rospy.init_node("yolov5", anonymous=True)
     detector = Yolov5Detector()
