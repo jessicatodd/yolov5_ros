@@ -27,12 +27,12 @@ torchvision>=0.8.1
 ```
 * Build the ROS package:
 ```bash
-cd <ros_workspace>
+cd warp_ws
 catkin build yolov5_ros # build the ROS package
 ```
 * Make the Python script executable 
 ```bash
-cd <ros_workspace>/src/yolov5_ros/src
+cd warp_ws/src/dreivers/yolo_ros_driver/yolov5_ros/src
 chmod +x detect.py
 ```
 
