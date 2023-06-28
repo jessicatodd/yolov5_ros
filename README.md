@@ -1,6 +1,8 @@
 # YOLOv5 ROS
 This is a ROS interface for using YOLOv5 for real time object detection on a ROS image topic. It supports inference on multiple deep learning frameworks used in the [official YOLOv5 repository](https://github.com/ultralytics/yolov5).
 
+This ROS interface has been modified to be compatible with WARPLab's CUREE (WARPAUV) robots. 
+
 ## Installation
 
 ### Dependencies
@@ -8,11 +10,20 @@ This package is built and tested on Ubuntu 20.04 LTS and ROS Noetic with Python 
 
 * Clone the packages to ROS workspace and install requirement for YOLOv5 submodule:
 ```bash
-cd <ros_workspace>/src
+cd warp_ws/src/drivers/yolo-ros-drivers
 git clone https://github.com/mats-robotics/detection_msgs.git
-git clone --recurse-submodules https://github.com/mats-robotics/yolov5_ros.git 
-cd yolov5_ros/src/yolov5
-pip install -r requirements.txt # install the requirements for yolov5
+git clone --recurse-submodules git@github.com:jessicatodd/yolov5_ros.git 
+```
+* Check and install the requirements for yolov5
+```bash
+cd yolov5_ros
+pip install -r requirements.txt  # install the requirements for yolov5_ros
+```
+* Yolov5 also requires OpenCV and Torch. The following package versions should be checked manually and only updated in consultation with Levi Cai. Note that OpenCV has been built from the source, not installed via `pip`. 
+```
+opencv2-python>=4.1.1
+torch>=1.7.0
+torchvision>=0.8.1
 ```
 * Build the ROS package:
 ```bash
