@@ -47,7 +47,7 @@ roslaunch yolov5_ros yolov5.launch
 ## Using custom weights and dataset (Working)
 * Put your weights into `yolov5_ros/src/yolov5`
 * Put the yaml file for your dataset classes into `yolov5_ros/src/yolov5/data`
-* Change related ROS parameters in yolov5.launch: `weights`,  `data`
+* Change related ROS parameters in yolov5.launch: `weights`,  `data` to the directory where your weights and yaml file are stored
 
 ## Reference
 * YOLOv5 official repository: https://github.com/ultralytics/yolov5
