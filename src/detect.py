@@ -60,7 +60,7 @@ class Yolov5Detector:
         )
 
         # Setting inference size
-        self.img_size = [rospy.get_param("~inference_size_w", 640), rospy.get_param("~inference_size_h",480)]
+        self.img_size = [rospy.get_param("~inference_size_w", 1920), rospy.get_param("~inference_size_h",1080)]
         self.img_size = check_img_size(self.img_size, s=self.stride)
 
         # Half
@@ -110,6 +110,8 @@ class Yolov5Detector:
             im = self.bridge.imgmsg_to_cv2(data, desired_encoding="bgr8")
         
         im, im0 = self.preprocess(im)
+
+
         # print(im.shape)
         # print(img0.shape)
         # print(img.shape)
@@ -174,7 +176,15 @@ class Yolov5Detector:
             cv2.imshow(str(0), im0)
             cv2.waitKey(1)  # 1 millisecond
         if self.publish_image:
-            self.image_pub.publish(self.bridge.cv2_to_imgmsg(im0, "bgr8"))
+
+            img_msg = self.bridge.cv2_to_imgmsg(im0, "bgr8")
+            img_msg.header = data.header
+            #img_msg.stamp = data.stamp
+            #img_msg.frame_id = data.frame_id
+
+            self.image_pub.publish(img_msg)
+
+            #self.image_pub.publish(self.bridge.cv2_to_imgmsg(im0, "bgr8"))
         
 
     def preprocess(self, img):
