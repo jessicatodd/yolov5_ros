@@ -73,7 +73,10 @@ class Yolov5Detector:
         bs = 1  # batch_size
         cudnn.benchmark = True  # set True to speed up constant image size inference
         self.model.warmup()  # warmup        
-        
+       
+        # Initialize CV_Bridge
+        self.bridge = CvBridge()
+
         # Initialize subscriber to Image/CompressedImage topic
         input_image_type, input_image_topic, _ = get_topic_type(rospy.get_param("~input_image_topic"), blocking = True)
         self.compressed_input = input_image_type == "sensor_msgs/CompressedImage"
@@ -97,9 +100,6 @@ class Yolov5Detector:
             self.image_pub = rospy.Publisher(
                 rospy.get_param("~output_image_topic"), Image, queue_size=10
             )
-        
-        # Initialize CV_Bridge
-        self.bridge = CvBridge()
 
     def callback(self, data):
         """adapted from yolov5/detect.py"""
